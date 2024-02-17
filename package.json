@@ -1,0 +1,43 @@
+{
+  "name": "@transmute/google-cloud-kms-cose-sign",
+  "version": "0.1.1",
+  "description": "COSE Signatures with Google Cloud KMS",
+  "main": "./dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "prebuild": "npm run clean",
+    "build": "tsc -b",
+    "test": "jest",
+    "coverage": "jest --ci --coverage",
+    "lint": "eslint ./src ./test --fix",
+    "shove": "git add -A; git commit -m ':rocket:'; git push origin main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/transmute-industries/google-cloud-kms-cose-sign.git"
+  },
+  "author": "Orie Steele",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/transmute-industries/google-cloud-kms-cose-sign/issues"
+  },
+  "homepage": "https://github.com/transmute-industries/google-cloud-kms-cose-sign#readme",
+  "devDependencies": {
+    "@types/jest": "^29.2.4",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@typescript-eslint/parser": "^5.47.1",
+    "eslint": "^8.30.0",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.3",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {}
+}
