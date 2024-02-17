@@ -1,6 +1,6 @@
 ### COSE Signatures
 
-#### with Google Cloud Key Management Service Clients
+#### with Google Cloud Key Management Service
 
 [![CI](https://github.com/transmute-industries/google-cloud-kms-cose-sign/actions/workflows/ci.yml/badge.svg)](https://github.com/transmute-industries/google-cloud-kms-cose-sign/actions/workflows/ci.yml)
 ![Branches](./badges/coverage-branches.svg)
