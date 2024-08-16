@@ -3,11 +3,6 @@
 #### with Google Cloud Key Management Service
 
 [![CI](https://github.com/transmute-industries/google-cloud-kms-cose-sign/actions/workflows/ci.yml/badge.svg)](https://github.com/transmute-industries/google-cloud-kms-cose-sign/actions/workflows/ci.yml)
-![Branches](./badges/coverage-branches.svg)
-![Functions](./badges/coverage-functions.svg)
-![Lines](./badges/coverage-lines.svg)
-![Statements](./badges/coverage-statements.svg)
-![Jest coverage](./badges/coverage-jest%20coverage.svg)
 
 ## Usage
 
@@ -15,7 +10,7 @@
 
 ```bash
 nvm use 18
-npm install '@transmute/google-cloud-kms-cose-sign'
+npm install @transmute/google-cloud-kms-cose-sign
 ```
 
 ```ts

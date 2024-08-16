@@ -19,11 +19,19 @@ export const signer = ({ alg, name, client }: RequestGoogleCloudKMSSigner): { si
       const hashName = coseAlgToNodeCryptHash[alg]
       const digest = crypto.createHash(hashName)
       digest.update(Buffer.from(bytes))
+      let digestParams
+      if (alg === 'ES256') {
+        digestParams = {
+          sha256: digest.digest(),
+        }
+      } else if (alg === 'ES384') {
+        digestParams = {
+          sha384: digest.digest(),
+        }
+      }
       const [{ signature }] = await client.asymmetricSign({
         name: name,
-        digest: {
-          sha384: digest.digest(),
-        },
+        digest: digestParams,
       })
       if (!signature) {
         throw new Error('Failed to sign message')
