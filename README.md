@@ -30,57 +30,20 @@ const client = new KeyManagementServiceClient({
   },
 });
 
-// Sign a message with a remote private key
-const coseSign1 = await cose.detached
+const coseSign1 = await cose
   .signer({
-    remote: kms.signer({
-      alg: "ES384",
-      name,
-      client,
-    }),
+    remote: await kms.cose.remote({ client, name, alg: "ES256" }),
   })
   .sign({
-    protectedHeader: new Map([
-      [
-        1,
-        -35, // alg: ES384
-      ],
+    protectedHeader: cose.ProtectedHeader([
+      [cose.Protected.Alg, cose.Signature.ES256],
     ]),
-    unprotectedHeader: new Map(),
     payload,
   });
 
-// Verify a message
-const verified = await cose.detached
-  .verifier({
-    resolver: {
-      resolve: async (coseSign1: ArrayBuffer) => {
-        const {
-          tag,
-          value: [protectedHeader],
-        } = await cose.cbor.decode(coseSign1);
-        if (tag !== 18) {
-          throw new Error("Only cose-sign1 are supported");
-        }
-        const header = await cose.cbor.decode(protectedHeader);
-        if (header.get(1) !== -35) {
-          throw new Error("Only ES384 signatures are supported");
-        }
-        // Normally you would check kid / iss
-        // and look up the public key from a cache
-        // but you can resolve the public key from Google KMS
-        // by name, like this:
-        return kms.getPublicKeyByName({
-          name,
-          client,
-        });
-      },
-    },
-  })
-  .verify({
-    coseSign1,
-    payload,
-  });
+const verified = await kms.cose.verifier({ client, name }).verify({
+  coseSign1,
+});
 ```
 
 ## Develop
